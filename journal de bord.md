@@ -1,6 +1,6 @@
 # journal
 ## avant le 18/04/2024
-### exploration des bases de données, FAOstat et UNComtrade, lecture des commandes R et GitHub ainsi que des articles et reportages qui nous ont été transmis.
+### exploration des bases de données, FAOstat et UNComtrade, lecture des commandes R et GitHub ainsi que des articles et reportages qui nous ont été transmis. Convention de stage
 
 ## 18/04/2024 
 ### recherche du sujet de recherche du stage ,le commerce illégal de bois ronds à destination de l'Europe.
