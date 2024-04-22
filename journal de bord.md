@@ -19,4 +19,8 @@ LIN, Jiunn-Cheng, LEE, Jun-Yen et LIU, Wan-Yu, 2021. Risk Analysis of Regions wi
 ### suite de la lecture des articles, note des éléments intéressants.
 ### autre article intéressant : (https://hal.science/hal-01388353/document)
 
+## 22/04/2024
+### réalisation d'un document word avec une ébauche de plan de présentation des résultats. J'ai écris les objectifs et ce que je dois écrire dans chacune des parties afin de chercher les informations concrètes dans la bibliographie et noter ensuite dans le plan l'url des articles correspondants.
+
+
 
