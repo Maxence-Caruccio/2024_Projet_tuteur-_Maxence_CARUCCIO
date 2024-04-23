@@ -22,5 +22,14 @@ LIN, Jiunn-Cheng, LEE, Jun-Yen et LIU, Wan-Yu, 2021. Risk Analysis of Regions wi
 ## 22/04/2024
 ### réalisation d'un document word avec une ébauche de plan de présentation des résultats. J'ai écris les objectifs et ce que je dois écrire dans chacune des parties afin de chercher les informations concrètes dans la bibliographie et noter ensuite dans le plan l'url des articles correspondants.
 
+## 23/04/2024
+### réunion sur l'utilisation des bases de données
+### exploration des bases de données, lectures des articles.
+### deux nouveaux artilcles intéressants sur les pourcentages de bois illégal par rapport aux commerce de bois total de certains pays.
+(https://www.chathamhouse.org/sites/default/files/publications/research/20150715IllegalLoggingHoareFinal.pdf
+https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED010Forest0Law01PUBLIC1.pdf)
+
+
+
 
 
