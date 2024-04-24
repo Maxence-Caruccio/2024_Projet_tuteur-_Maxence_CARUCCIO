@@ -29,6 +29,9 @@ LIN, Jiunn-Cheng, LEE, Jun-Yen et LIU, Wan-Yu, 2021. Risk Analysis of Regions wi
 (https://www.chathamhouse.org/sites/default/files/publications/research/20150715IllegalLoggingHoareFinal.pdf
 https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED010Forest0Law01PUBLIC1.pdf)
 
+## 24/04/2025
+### suite de lecture des articles, mise en page de certains tableaux intéressants. Recherche de documentation sur les essences principalement produites/exportés de chaque pays, mais très mal documenté.
+### Pas non plus renseigné sur les bases UnComtrade, impossible même de déterminer si c'est du conifère ou non pour certains pays.
 
 
 
