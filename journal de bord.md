@@ -33,6 +33,9 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ### suite de lecture des articles, mise en page de certains tableaux intéressants. Recherche de documentation sur les essences principalement produites/exportés de chaque pays, mais très mal documenté.
 ### Pas non plus renseigné sur les bases UnComtrade, impossible même de déterminer si c'est du conifère ou non pour certains pays.
 
+## 25/04/2024
+### suite de lecture des articles, reception du script R permettant de faire fonctionner le code python afin d'importer les données d'UNcomtrade. installation d'anaconda, run du script R et exportation du tableau de données concernant l'import/export du bois rond. Exploration des données.
+
 
 
 
