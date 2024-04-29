@@ -36,6 +36,8 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ## 25/04/2024
 ### suite de lecture des articles, reception du script R permettant de faire fonctionner le code python afin d'importer les données d'UNcomtrade. installation d'anaconda, run du script R et exportation du tableau de données concernant l'import/export du bois rond. Exploration des données.
 
+## 26 et 29/04/2024
+### redéfinition d'une partie du plan et remplissage des parties de l'introduction avec les articles trouvés ou de nouveaux. (https://cdn.greenpeace.fr/site/uploads/2023/06/dossier-greenpeace-proces-bois-illegal-2023.docx.pdf) . j'ai trouvé les infos pour -le contexte et la place du commerce du bois, -la définition du commerce illégal, -le cadre législatif européen pour lutter contrez le commerce illégal, -les facteurs pouvant conduire à un export de bois illégal ,- les conséquences du commerce du bois illégal et -les limites de l'étude.
 
 
 
