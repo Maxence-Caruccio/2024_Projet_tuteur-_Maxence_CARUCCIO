@@ -39,5 +39,9 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ## 26 et 29/04/2024
 ### redéfinition d'une partie du plan et remplissage des parties de l'introduction avec les articles trouvés ou de nouveaux. (https://cdn.greenpeace.fr/site/uploads/2023/06/dossier-greenpeace-proces-bois-illegal-2023.docx.pdf) . j'ai trouvé les infos pour -le contexte et la place du commerce du bois, -la définition du commerce illégal, -le cadre législatif européen pour lutter contrez le commerce illégal, -les facteurs pouvant conduire à un export de bois illégal ,- les conséquences du commerce du bois illégal et -les limites de l'étude.
 
-
+## 30/04 et 02/05/2024
+### Continuer de chercher des infos pour l'introduction.
+### je me suis fais des fiches papier avec tous les pays "à risque" et leur taux de bois illégal exporté, des fiches avec les codes HS.
+### Manipulation des données sur R afin d'avoir des csv avec seulement les données qui m'intéressent. Je trouve très peu de pays de l'UE qui importe du bois rond depuis les pays à rique ou ces pays qui exportent vers l'UE, alors que les données sont sur les 20 dernières années.
+### update: certaines données apparaissent pourtant sur UNcomtrade, j'ai du me tromper dans le script heureusement.
 
