@@ -45,3 +45,9 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ### Manipulation des données sur R afin d'avoir des csv avec seulement les données qui m'intéressent. Je trouve très peu de pays de l'UE qui importe du bois rond depuis les pays à rique ou ces pays qui exportent vers l'UE, alors que les données sont sur les 20 dernières années.
 ### update: certaines données apparaissent pourtant sur UNcomtrade, j'ai du me tromper dans le script heureusement.
 
+## 03/05/2024
+### tentative de résolution du problème sur le code, sans résultat. lecture biblio et continuer de rédiger l'introduction
+
+## 06/05/2024
+### filtrage des csv directement sur excel. création de différents excel avec les imports, les exports, et ceux avec seulement les données bilatérales qui m'intéressent, avec les données miroirs.
+### calcul, de la valeur marchande de bois illégal en focntion des coefficients de chaque pays, puis calcul de la valeur totale de bois illégal importé en UE. reste a faire les données miroirs avec le tableur des exports, puis de filtrer pays par pays de l'UE afin de voir l'implication de chacun.
