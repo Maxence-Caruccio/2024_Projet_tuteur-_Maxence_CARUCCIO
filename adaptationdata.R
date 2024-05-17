@@ -132,3 +132,18 @@ xylophone <- Data %>%
   filter(reporterDesc == UE27, partnerDesc == PAYSILL)
 
 #######~~~~~~~non~~~~~~~~~##
+
+# Export data as a csv file
+write.csv(impUE,
+          "C:/Users/asus/Documents/GCRE/S8/stage/un_comtrade_data/raw_data/uncomtrade_datatest.csv",
+          row.names = FALSE,sep=",")
+
+# To load back the csv file
+data <- read.csv(list.files(path = "C:/Users/asus/Documents/GCRE/S8/stage/un_comtrade_data/raw_data",sep = "",
+                            pattern = ".csv",
+                            full.names = TRUE))
+all(dim(data) == dim(impUE)) # if TRUE: same dimensions
+# The two dataframes are not exactly equals: some minor differences remain
+# To check differences, use: all.equal(data, trade_data)
+
+#########le csv crée ne me donne pas toutes les données qu'il devrait y avoir.
