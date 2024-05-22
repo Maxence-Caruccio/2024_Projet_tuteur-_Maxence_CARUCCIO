@@ -87,63 +87,173 @@ PAYSILL=c("Bolivia","Brazil","Colombia","Ecuador","Peru","Mexico","Nicaragua","H
 table(PAYSILL) ###il y a bien les 36
 table(UE27)# il y en a bien 27
 
-##########################
-#########test avec subset############
-impUE <- subset(import, reporterDesc == UE27)
-table(impUE$reporterDesc)
+data[(data$flowCode == "X") &
+       (data$reporterDesc %in% PAYSILL) &
+       (data$partnerDesc %in% UE27),]
 
-expUE <- subset(impUE,partnerDesc==PAYSILL)
-table(expUE$partnerDesc)
-
-
-###########################
-#Données Miroirs
-##########################
-expILL=subset(export,reporterDesc==c("Bolivia","Brazil","Colombia","Ecuador","Peru","Mexico","Nicaragua","Honduras","Russian Federation","Tajikistan","Bosnia Herzegovina","Serbia and Montenegro","North Macedonia","Albiania","Estonia","Bulgaria","Slovakia","Latvia","Cameroon","Gabon","Ghana","Nigeria","Equatorial Guinea","Benin","Mozambique","China","Indonesia","Cambodia","Lao People's Dem. Rep.","Malaysia","Papua New Guinea","Philippines","Thailand","Viet Nam","Myanmar","Rep. of Korea"))
-table(expILL$reporterDesc)
-
-impILL=subset(expILL,partnerDesc==c("Austria","Croatia","Czechia","Estonia","Finland","France","Greece","Hungary","Ireland","Italy","Latvia","Luxembourg","Malta","Netherlands","Portugal","Romania","Spain","Sweden","Slovenia","Poland","Lithuania","Germany","Denmark","Cyprus","Bulgaria","Belgium","Slovakia"))
-table(impILL$partnerDesc)
-#~~~~~~~~non~~~~~~
-###########################
-
-##########test avec les crochets ##################
-impue <- import[import$reporterDesc == UE27,]
-exp <- import[import$partnerDesc == PAYSILL, ]
-v<- impue[impue$partnerDesc== PAYSILL,]
-#~~~~~~~~non~~~~~~~~
-
-############test avec dplyr###################
-library(dplyr)
-
-impue2 <- filter(import, reporterDesc == UE27, partnerDesc == PAYSILL)
-impue2b <- filter(import, reporterDesc == UE27)
-impue2t <- filter(import, partnerDesc == PAYSILL)
-v1 <- filter(import, impue2b & impue2t)
-v1 <- filter(import, reporterDesc == UE27 & partnerDesc == PAYSILL)
+library('dplyr')
 
 
 
-impue2b <- filter(import, reporterDesc == UE27)
-impue2t <- filter(import, partnerDesc == PAYSILL)
-v2 <- inner_join(impue2b, impue2t)
+export = data[(data$flowCode == "X"),]
+import = data[(data$flowCode == "M"),]
+mirror_flow = full_join(export[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")], 
+                        import[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")], 
+                        by=c("cmdCode", "period", "reporterDesc"="partnerDesc", "partnerDesc"="reporterDesc"))
 
-xylophone <- Data %>%
-  filter(reporterDesc == UE27, partnerDesc == PAYSILL)
+mirror_flow = merge(x= export[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
+                    y= import[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
+                    by.x=c("cmdCode", "period", "reporterDesc", "partnerDesc"),
+                    by.y=c("cmdCode", "period", "partnerDesc", "reporterDesc"),
+                    all.x = TRUE, all.y = TRUE)
 
-#######~~~~~~~non~~~~~~~~~##
+toMatch = c('\\d','XX','_X')
+hop <-Data[!(grepl(paste(toMatch,collapse="|"), Data$reporterISO)) &
+             !(grepl(paste(toMatch,collapse="|"), Data$partnerISO)),]
+ ###########coef bas ###############
+Donnees <-mirror_flow[(mirror_flow$reporterDesc %in% PAYSILL) &
+                    (mirror_flow$partnerDesc %in% UE27),]
 
-# Export data as a csv file
-write.csv(impUE,
-          "C:/Users/asus/Documents/GCRE/S8/stage/un_comtrade_data/raw_data/uncomtrade_datatest.csv",
-          row.names = FALSE,sep=",")
+Donnee <- Donnees %>%
+  mutate(coefficient_bas = ifelse(reporterDesc == "Brazil", 0.20,
+                              ifelse(reporterDesc == "Benin", 0.80,
+                              ifelse(reporterDesc == "Bosnia Herzegovina", 0.80,
+                              ifelse(reporterDesc == "Bulgaria", 0.40,
+                              ifelse(reporterDesc == "Cameroon", 0.50,
+                              ifelse(reporterDesc == "China", 0.32,
+                              ifelse(reporterDesc == "Colombia", 0.42,
+                              ifelse(reporterDesc == "Ecuador", 0.70,
+                              ifelse(reporterDesc == "Estonia", 0.50,
+                              ifelse(reporterDesc == "Gabon", 0.70,
+                              ifelse(reporterDesc == "Ghana", 0.60,
+                              ifelse(reporterDesc == "Honduras", 0.75,
+                              ifelse(reporterDesc == "Indonesia", 0.60,
+                              ifelse(reporterDesc == "Latvia", 0.20,
+                              ifelse(reporterDesc == "Mozambique", 0.50,
+                              ifelse(reporterDesc == "Lao People's Dem. Rep.", 0.45,
+                              ifelse(reporterDesc == "Malaysia", 0.35,
+                              ifelse(reporterDesc == "Mexico", 0.70,
+                              ifelse(reporterDesc == "Myanmar", 0.50,
+                              ifelse(reporterDesc == "Nicaragua", 0.50,
+                              ifelse(reporterDesc == "Nigeria", 0.90,
+                              ifelse(reporterDesc == "North Macedonia", 0.25,
+                              ifelse(reporterDesc == "Papua New Guinea", 0.70,
+                              ifelse(reporterDesc == "Peru", 0.80,
+                              ifelse(reporterDesc == "Philippines", 0.46,
+                              ifelse(reporterDesc == "Rep. of Korea", 0.30,
+                              ifelse(reporterDesc == "Russian Federation", 0.15,
+                              ifelse(reporterDesc == "Albania", 0.81,
+                              ifelse(reporterDesc == "Slovakia", 0.10,
+                              ifelse(reporterDesc == "Dem. Rep. of the Congo", 0.90,
+                              ifelse(reporterDesc == "Congo", 0.70,
+                              ifelse(reporterDesc == "Equatorial Guinea", 0.50,
+                              ifelse(reporterDesc == "Thailand", 0.40,
+                              ifelse(reporterDesc == "Viet Nam", 0.20,
+                              ifelse(reporterDesc == "Cambodia", 0.90,
+                              ifelse(reporterDesc == "Tajikistan", 0.20,
+                              ifelse(reporterDesc == "Serbia and Montenegro (...2005)", 0.50,NA_real_))))))))))))))))))))))))))))))))))))))
+#####vérif####
+ length(unique(Donnees$reporterDesc))
+length(PAYSILL)         
+which(is.na(Donnee$coefficient))
 
-# To load back the csv file
-data <- read.csv(list.files(path = "C:/Users/asus/Documents/GCRE/S8/stage/un_comtrade_data/raw_data",sep = "",
-                            pattern = ".csv",
-                            full.names = TRUE))
-all(dim(data) == dim(impUE)) # if TRUE: same dimensions
-# The two dataframes are not exactly equals: some minor differences remain
-# To check differences, use: all.equal(data, trade_data)
+table(Donnee$reporterDesc)
+table(PAYSILL)
 
-#########le csv crée ne me donne pas toutes les données qu'il devrait y avoir.
+############### coef haut ############
+
+Donnee <- Donnee %>%
+  mutate(coefficient_haut = ifelse(reporterDesc == "Brazil", 0.50,
+                              ifelse(reporterDesc == "Benin", 0.90,
+                                     ifelse(reporterDesc == "Bosnia Herzegovina", 0.80,
+                                            ifelse(reporterDesc == "Bulgaria", 0.40,
+                                                   ifelse(reporterDesc == "Cameroon", 0.65,
+                                                          ifelse(reporterDesc == "China", 0.32,
+                                                                 ifelse(reporterDesc == "Colombia", 0.42,
+                                                                        ifelse(reporterDesc == "Ecuador", 0.70,
+                                                                               ifelse(reporterDesc == "Estonia", 0.50,
+                                                                                      ifelse(reporterDesc == "Gabon", 0.70,
+                                                                                             ifelse(reporterDesc == "Ghana", 0.70,
+                                                                                                    ifelse(reporterDesc == "Honduras", 0.85,
+                                                                                                           ifelse(reporterDesc == "Indonesia", 0.80,
+                                                                                                                  ifelse(reporterDesc == "Latvia", 0.20,
+                                                                                                                         ifelse(reporterDesc == "Mozambique", 0.50,
+                                                                                                                                ifelse(reporterDesc == "Lao People's Dem. Rep.", 0.80,
+                                                                                                                                       ifelse(reporterDesc == "Malaysia", 0.35,
+                                                                                                                                              ifelse(reporterDesc == "Mexico", 0.70,
+                                                                                                                                                     ifelse(reporterDesc == "Myanmar", 0.50,
+                                                                                                                                                            ifelse(reporterDesc == "Nicaragua", 0.50,
+                                                                                                                                                                   ifelse(reporterDesc == "Nigeria", 0.90,
+                                                                                                                                                                          ifelse(reporterDesc == "North Macedonia", 0.30,
+                                                                                                                                                                                 ifelse(reporterDesc == "Papua New Guinea", 0.70,
+                                                                                                                                                                                        ifelse(reporterDesc == "Peru", 0.90,
+                                                                                                                                                                                               ifelse(reporterDesc == "Philippines", 0.46,
+                                                                                                                                                                                                      ifelse(reporterDesc == "Rep. of Korea", 0.30,
+                                                                                                                                                                                                             ifelse(reporterDesc == "Russian Federation", 0.50,
+                                                                                                                                                                                                                    ifelse(reporterDesc == "Albania", 0.81,
+                                                                                                                                                                                                                           ifelse(reporterDesc == "Slovakia", 0.10,
+                                                                                                                                                                                                                                  ifelse(reporterDesc == "Dem. Rep. of the Congo", 0.90,
+                                                                                                                                                                                                                                         ifelse(reporterDesc == "Congo", 0.70,
+                                                                                                                                                                                                                                                ifelse(reporterDesc == "Equatorial Guinea", 0.50,
+                                                                                                                                                                                                                                                       ifelse(reporterDesc == "Thailand", 0.40,
+                                                                                                                                                                                                                                                              ifelse(reporterDesc == "Viet Nam", 0.40,
+                                                                                                                                                                                                                                                                     ifelse(reporterDesc == "Cambodia", 0.90,
+                                                                                                                                                                                                                                                                            ifelse(reporterDesc == "Tajikistan", 0.30,
+                                                                                                                                                                                                                                                                                   ifelse(reporterDesc == "Serbia and Montenegro (...2005)", 0.50,NA_real_))))))))))))))))))))))))))))))))))))))
+### création colonne des valeurs #########
+Donnee$valeur <- ifelse(is.na(Donnee$primaryValue.y), Donnee$primaryValue.x, Donnee$primaryValue.y)
+Donnee$Vraie_ValeurB <- Donnee$valeur*Donnee$coefficient_bas
+Donnee$Vraie_ValeurH <- Donnee$valeur*Donnee$coefficient_haut
+
+############# Calculs valeur total
+
+Valeur_ILL_ImportUE_B <- sum(Donnee$Vraie_ValeurB)  ####7,6 Milliards $
+Valeur_ILL_ImportUE_H <- sum(Donnee$Vraie_ValeurH) #### 11,6 Milliards $
+
+###### Calculs % par rapport aux imports totaux de l'UE
+Imports_UE <-mirror_flow[(mirror_flow$partnerDesc %in% UE27),]
+Imports_UE$valeur <- ifelse(is.na(Imports_UE$primaryValue.y), Imports_UE$primaryValue.x, Imports_UE$primaryValue.y)
+Valeur_Total_ImportUE <-sum(Imports_UE$valeur)
+
+Rapport_Bas <-Valeur_ILL_ImportUE_B / Valeur_Total_ImportUE  #### 4,49 %
+Rapport_Haut <- Valeur_ILL_ImportUE_H / Valeur_Total_ImportUE  #### 6,89 %
+
+######## Participation des pays de l'ue 
+
+grouped_dataB <- Donnee %>%
+  group_by(partnerDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurB, na.rm = TRUE))
+
+pie(grouped_dataB$total_primaryValue,label=grouped_dataB$partnerDesc)
+
+grouped_dataH <- Donnee %>%
+  group_by(partnerDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurH, na.rm = TRUE))
+
+grouped_dataB$Pourcentage <- grouped_dataB$total_primaryValue / Valeur_ILL_ImportUE_B
+grouped_dataH$Pourcentage <- grouped_dataH$total_primaryValue / Valeur_ILL_ImportUE_H
+
+#### participation des pays à coeff illégal
+
+grouped_dataBill <- Donnee %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurB, na.rm = TRUE))
+
+grouped_dataHill <- Donnee %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurH, na.rm = TRUE))
+
+grouped_dataBill$Pourcentage <- grouped_dataBill$total_primaryValue / Valeur_ILL_ImportUE_B
+grouped_dataHill$Pourcentage <- grouped_dataHill$total_primaryValue / Valeur_ILL_ImportUE_H
+
+ggplot(Donnee, aes(x=period, y=Vraie_ValeurB)) +
+  geom_line()
+
+ggplot(Donnee, aes(x=period, y=Vraie_ValeurH)) +
+  geom_line()
+
+### influence du prix du bois russe en 2007-2008
+
+##création data 2000-2008 et 2008-2020
+
+
