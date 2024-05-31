@@ -256,4 +256,52 @@ ggplot(Donnee, aes(x=period, y=Vraie_ValeurH)) +
 
 ##création data 2000-2008 et 2008-2020
 
+an2000_2008 <- c("2000","2001","2002","2003","2004","2005","2006","2007","2008")
+an2009_2020 <- c("2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020")
+
+av2008 <-Donnee[(Donnee$reporterDesc %in% PAYSILL) &
+                        (Donnee$partnerDesc %in% UE27) & (Donnee$period %in% an2000_2008),]
+
+ap2008 <-Donnee[(Donnee$reporterDesc %in% PAYSILL) &
+                       (Donnee$partnerDesc %in% UE27) & (Donnee$period %in% an2009_2020),]
+
+grouped_dataBill_av2008 <- av2008 %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurB, na.rm = TRUE))
+
+grouped_dataBill_ap2008 <- ap2008 %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurB, na.rm = TRUE))
+
+grouped_dataHill_av2008 <- av2008 %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurH, na.rm = TRUE))
+
+grouped_dataHill_ap2008 <- ap2008 %>%
+  group_by(reporterDesc) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurH, na.rm = TRUE))
+
+####plot de l'évolution dans le temps des exports
+ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(title = "Évolution des valeurs de différents pays dans le temps",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays") +
+  theme_minimal()
+
+####selection des 5 premiers exportateurs avant et apres 2008: russie, estonie,gabon,lettonie,RDC,Congo
+country_colors <- c("Estonia" = "red", "Russian Federation" = "blue", "Latvia" ="green", "Gabon" = "yellow", "Dem. Rep. of the Congo" ="purple", "Congo" = "cyan")
+
+ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+scale_color_manual(values = c(country_colors, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays") 
+
+###### tendance bois ill 10 dernières années #######
 
