@@ -25,7 +25,7 @@ for (file in list.files(path = dir, pattern = ".py")){
 apikey <- readLines(list.files(path = dir, pattern = ".txt"))
 
 # Set up parameters
-years <- 2000:2020
+years <- 2000:2022
 cmd_code <- paste(sort(c("4403")),
                   sep = "",
                   collapse = ",")
@@ -304,4 +304,131 @@ scale_color_manual(values = c(country_colors, "gray")) +
        color = "Pays") 
 
 ###### tendance bois ill 10 dernières années #######
+##### regrouper total bois ill pour chaque année ###
+
+data_annéesB <- Donnee %>%
+  group_by(period) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurB, na.rm = TRUE))
+
+sum(data_annéesB$total_primaryValue)
+
+data_annéesH <- Donnee %>%
+  group_by(period) %>%
+  summarize(total_primaryValue = sum(Vraie_ValeurH, na.rm = TRUE))
+
+ sum(data_annéesH$total_primaryValue)###c'est bien équivalent à la valeur total calculée avant
+
+ 
+ data_années <- Donnee %>%
+   group_by(period) %>%
+   summarize((total_primaryValueH = sum(Vraie_ValeurH, na.rm = TRUE)),total_primaryValueB = sum(Vraie_ValeurB, na.rm = TRUE))
+
+ data_années$moyenne<- (data_années$total_primaryValueB+data_années$`(total_primaryValueH = sum(Vraie_ValeurH, na.rm = TRUE))`)/2
+ 
+  plot(data_annéesB)
+ 
+            
+
+ ggplot(data_années, aes(x = period, y = moyenne,)) +
+   geom_line(size = 1) +
+   geom_point(size = 1) +
+   geom_ribbon(aes(ymin = data_années$total_primaryValueB, ymax = data_années$`(total_primaryValueH = sum(Vraie_ValeurH, na.rm = TRUE))`), alpha = 0.2) +
+   scale_color_manual(values = c(country_colors, "gray")) +
+   scale_fill_manual(values = c(country_colors, "gray")) +
+   labs(title = "Évolution des valeurs pour la période 2010-2015 avec intervalles de confiance",
+        x = "Période",
+        y = "Valeur principale",
+        color = "Pays",
+        fill = "Pays") +
+   theme_minimal()
+ 
+ ###rajout d'un graph avec le pourcentage d'ill par année en fonction de l'import total
+  data_annéesTotal <- Imports_UE %>%
+    group_by(period) %>%
+    summarize(total_primaryValue = sum(valeur, na.rm = TRUE))
+  sum(data_annéesTotal$total_primaryValue)
+  
+ data_années$pourcentageB <- (data_années$total_primaryValueB/data_annéesTotal$total_primaryValue)*100
+data_années$pourcetageH <-(data_années$`(total_primaryValueH = sum(Vraie_ValeurH, na.rm = TRUE))`/data_annéesTotal$total_primaryValue)*100
+
+data_années$moyennepourcentage<- (data_années$pourcentageB+data_années$pourcetageH)/2
+
+
+ggplot(data_années, aes(x = period, y = moyennepourcentage,)) +
+  geom_line(size = 1) +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = data_années$pourcentageB, ymax = data_années$pourcetageH), alpha = 0.2) +
+  scale_color_manual(values = c(country_colors, "gray")) +
+  scale_fill_manual(values = c(country_colors, "gray")) +
+  labs(title = "Évolution des valeurs pour la période 2010-2015 avec intervalles de confiance",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays",
+       fill = "Pays") +
+  theme_minimal()
+
+###### principaux exportateurs illégaux
+
+country_colors <- c("Estonia" = "red", "Russian Federation" = "blue", "Latvia" ="green", "Gabon" = "yellow", "Dem. Rep. of the Congo" ="purple", "Congo" = "cyan")
+country_colors1 <- c("Estonia" = "red")
+country_colors2 <- c("Russian Federation" = "red")
+country_colors3 <- c("Latvia" ="red")
+country_colors4 <- c("Gabon" = "red")
+country_colors5 <- c("Dem. Rep. of the Congo" ="red")
+country_colors6 <- c( "Congo" = "red")
+
+
+ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors1, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale")
+
+g2<-ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors2, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays")
+
+g3<-ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors3, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays")
+g4<-ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors4, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays")
+
+g5<-ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors5, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",
+       color = "Pays")
+
+g6<-ggplot(grouped_dataBill, aes(x = period, y = total_primaryValue, color = reporterDesc, group= reporterDesc)) +
+  geom_line(size = 1) +
+  geom_point(size = 1)+
+  scale_color_manual(values = c(country_colors6, "gray")) +
+  labs(title = "Évolution des valeurs pour tous les pays",
+       x = "Période",
+       y = "Valeur principale",)
+library(cowplot)
+plot_grid(g1,g2,g3,g4,g5,g6)
+
 
