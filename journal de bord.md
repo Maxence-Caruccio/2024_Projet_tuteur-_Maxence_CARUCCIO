@@ -51,3 +51,11 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ## 06/05/2024
 ### filtrage des csv directement sur excel. création de différents excel avec les imports, les exports, et ceux avec seulement les données bilatérales qui m'intéressent, avec les données miroirs.
 ### calcul, de la valeur marchande de bois illégal en focntion des coefficients de chaque pays, puis calcul de la valeur totale de bois illégal importé en UE. reste a faire les données miroirs avec le tableur des exports, puis de filtrer pays par pays de l'UE afin de voir l'implication de chacun.
+
+## 31/05/2024
+### réunion bilan partie matériel et méthode, introduction. point individuel sur l'avancement du travail, points d'amélioration.
+### Réalisation du graphique pour la visualisation de l'import estimé illégal en europe depuis 2000, avec les intervalles correspondant aux coefficients.
+### Réalisation du graphique de l'évolution des ratios de bois illégal importé par années sur le bois total importé cette année.
+### Création des 6 graphs montrant l'évolution 6 plus gros exportateurs illégaux dans le temps.
+### Début de recherche pour la carte choroplèthe quantifiant l'implication de chacun des pays membres de l'ue.
+### il ne reste donc que ce graphique, la quantification des imports avant et apres 2008 et la rédaction du rapport.
