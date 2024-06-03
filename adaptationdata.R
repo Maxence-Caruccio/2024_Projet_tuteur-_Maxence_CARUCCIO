@@ -432,3 +432,46 @@ library(cowplot)
 plot_grid(g1,g2,g3,g4,g5,g6)
 
 
+par(mfrow = c(1,1))
+######### carte choroplèthe ############
+
+library(sf)
+shapefile_path <- "C:/Users/asus/Documents/GCRE/S8/stage/un_comtrade_data/Europe_merged.shp"
+
+# Lire le shapefile
+shape_data <- st_read(shapefile_path)
+
+# Afficher les premières lignes des données
+print(head(shape_data))
+
+# Afficher un résumé des données
+summary(shape_data)
+
+# Visualiser le shapefile avec ggplot2
+ggplot(data = shape_data) +
+  geom_sf() +
+  theme_minimal() +
+  labs(title = "Carte du Shapefile")
+
+shape_data$COUNTRY
+
+Europe <- shape_data %>%
+  left_join(grouped_dataH, by = c("COUNTRY" = "partnerDesc"))
+
+
+europe <- europe %>%
+  mutate(category = case_when(
+    Pourcentage < 0.02 ~ "a:moins de 2%",
+    Pourcentage >= 0.02 & Pourcentage < 0.1 ~ "b:entre 2 et 10 %",
+    Pourcentage >= 0.1 & Pourcentage < 0.2 ~ "c:entre 10 et 20 %",
+    Pourcentage >= 0.2 ~ "d:plus de 20%",
+    TRUE ~ NA_character_
+  ))
+ggplot(data = europe) +
+  geom_sf(aes(fill = category)) +
+  scale_fill_manual(values = c("a:moins de 2%" = "yellow", "b:entre 2 et 10 %" = "orange", "c:entre 10 et 20 %" = "red","d:plus de 20%" = "darkred"), na.value = "gray") +
+  theme_minimal() +
+  labs(title = "Carte de l'Europe",
+       fill = "Catégorie")
+
+
