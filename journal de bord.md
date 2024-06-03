@@ -59,3 +59,7 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ### Création des 6 graphs montrant l'évolution 6 plus gros exportateurs illégaux dans le temps.
 ### Début de recherche pour la carte choroplèthe quantifiant l'implication de chacun des pays membres de l'ue.
 ### il ne reste donc que ce graphique, la quantification des imports avant et apres 2008 et la rédaction du rapport.
+
+## 03/06/2024
+### avancement de la partie introduction, j'ai déterminé le plan de l'introduction, les grandes lignes et ai commencé à rédiger certaines parties avec les bibliographies déjà selectionnées.
+### réalisation de la carte choroplèthe avec une gradation de l'implication de chaque pays de l'UE.
