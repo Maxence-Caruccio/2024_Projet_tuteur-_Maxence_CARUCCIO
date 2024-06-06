@@ -63,3 +63,9 @@ https://documents1.worldbank.org/curated/en/330441468161667685/pdf/366380REVISED
 ## 03/06/2024
 ### avancement de la partie introduction, j'ai déterminé le plan de l'introduction, les grandes lignes et ai commencé à rédiger certaines parties avec les bibliographies déjà selectionnées.
 ### réalisation de la carte choroplèthe avec une gradation de l'implication de chaque pays de l'UE.
+
+## 05/06/2024
+### retouches sur des figures + rédactions partie résultat.
+
+## 06/06/2024
+### Rédaction partie introduction + début de correction partie résultat.
